@@ -1,14 +1,57 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        Hola Campeones bienvenidos a Programación 2
-        <br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
+        <p:growl id="grwlErrores"/>
+        <h:form id="frmInfante">
+            <p:panel header="Lista Simplemente Enlazada Infantes - Total Infantes #{sesionInfante.listaInfantes.contarNodos()}">
+                <p:panelGrid columns="2">
+                    <p:panel header="Datos Infante">
+
+                        <p:panelGrid columns="2">
+                            <p:outputLabel for="txtNombre" value="Nombre"/>
+                            <p:inputText id="txtNombre" required="true" disabled="#{sesionInfante.deshabilitarFormulario}"
+                                         value="#{sesionInfante.infante.nombre}"   />
+                            <p:outputLabel for="spEdad" value="Edad"/>
+                            <p:spinner id="spEdad" required="true" min="1" max="7" disabled="#{sesionInfante.deshabilitarFormulario}"
+                                       value="#{sesionInfante.infante.edad}"/>
+                            <p:outputLabel value="Al inicio"/>
+                            <p:selectOneMenu value="#{sesionInfante.alInicio}" disabled="#{sesionInfante.deshabilitarFormulario}">
+                                <f:selectItem itemLabel="SI" itemValue="1"/>
+                                <f:selectItem itemLabel="NO" itemValue="0"/>
+                            </p:selectOneMenu>
+                        </p:panelGrid>
+                        <p:commandButton value="Guardar" update="frmInfante,:grwlErrores"
+                                         action="#{sesionInfante.guardarInfante()}" disabled="#{sesionInfante.deshabilitarFormulario}"/>
+                        
+                        <p:commandButton value="Nuevo" update="frmInfante" action="#{sesionInfante.habilitarFormulario()}"
+                                         disabled="#{!sesionInfante.deshabilitarFormulario}"
+                                         />
+                        <p:panelGrid columns="3">
+                            <p:commandButton value="Primero"/>
+                            <p:commandButton value="Siguiente" action="#{sesionInfante.irSiguiente()}"
+                                             update="frmInfante"/>       
+                            <p:commandButton value="Último"/>
+                            
+                            
+                            
+                            
+                        </p:panelGrid>
+                    </p:panel>
+
+                    <p:panel header="Gráfico">
+
+                    </p:panel>
+
+                </p:panelGrid>
+            </p:panel>
+        </h:form>
     </h:body>
 </html>
 

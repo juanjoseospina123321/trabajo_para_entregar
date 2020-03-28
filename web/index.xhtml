@@ -6,6 +6,36 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
+        <style type="text/css">
+    .ui-diagram-element {   
+        width:14em; 
+        height:4em;     
+        line-height:4em;
+        text-align: center;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
+        border-radius: 4px;
+        border: 1px solid transparent;
+        background-color: #98AFC7;
+        color: #ffffff;
+    }
+     
+    .ui-diagram-success {
+        background-color: #9CB071;
+        color: #ffffff;
+        border-color: #7ab02c;
+    }
+     
+    .ui-diagram-fail {
+        background-color: #C34A2C;
+        color: #ffffff;
+    }
+     
+    .flow-label {
+        font-size: 24px;
+        font-weight: bold;
+        color: #816A51;
+    }
+</style>
     </h:head>
     <h:body>
         <p:growl id="grwlErrores"/>
@@ -34,22 +64,50 @@
                                          disabled="#{!sesionInfante.deshabilitarFormulario}"
                                          />
                         <p:panelGrid columns="3">
-                            <p:commandButton value="Primero"/>
+                            <p:commandButton value="Primero" action="#{sesionInfante.irPrimero()}" 
+                                              update="frmInfante"/>
                             <p:commandButton value="Siguiente" action="#{sesionInfante.irSiguiente()}"
                                              update="frmInfante"/>       
-                            <p:commandButton value="Último"/>
-                            
+                            <p:commandButton value="Último" action="#{sesionInfante.irUltimo()}" 
+                                             update="frmInfante"/>                           
                             
                             
                             
                         </p:panelGrid>
                     </p:panel>
-
-                    <p:panel header="Gráfico">
-
+                    
+                    <p:panel header="Gráfico" id="pnlVista" style="width: 100%;">
+                        <p:commandButton value="#{sesionInfante.textoVista}" 
+                                         action="#{sesionInfante.cambiarVistaInfantes()}"
+                                         update="pnlVista"/>
+                        
+                        <p:dataTable rendered="#{sesionInfante.textoVista=='Gráfico'}"  value="#{sesionInfante.listadoInfantes}" var="inf">
+                            <p:column>
+                                <f:facet name="header">
+                                    <p:outputLabel value="Código"/>
+                                </f:facet>
+                                <p:outputLabel value="#{inf.codigo}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <p:outputLabel value="Nombre"/>
+                                </f:facet>
+                                <p:outputLabel value="#{inf.nombre}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <p:outputLabel value="Edad"/>
+                                </f:facet>
+                                <p:outputLabel value="#{inf.edad}"/>
+                            </p:column>
+                        </p:dataTable>
+                        
+                        <p:diagram rendered="#{sesionInfante.textoVista=='Tabla'}" value="#{sesionInfante.model}" style="height:600px; width: 800px;" styleClass="ui-widget-content" />
+                        
                     </p:panel>
 
                 </p:panelGrid>
+                <p:outputLabel value="#{sesionInfante.listaInfantes.obtenerListadoInfantes()}"/>
             </p:panel>
         </h:form>
     </h:body>

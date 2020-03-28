@@ -6,6 +6,8 @@
 package com.listase.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -79,7 +81,55 @@ public class ListaSE implements Serializable{
         }
     }
     
+    public String obtenerListadoInfantes()
+    {
+        
+        //Un método recursivo que recoora mis infantes y que sacando la
+        // info la adicione een el string
+        
+        return listarInfantes("");
+    }
+    
+    public String listarInfantes(String listado)
+    {
+        if(cabeza !=null)
+        {
+            Nodo temp= cabeza;            
+            while(temp!=null)
+            {
+                listado += temp.getDato()+"\n";
+                temp=temp.getSiguiente();
+                
+            }
+            return listado;
+        }
+        return "No hay infantes";
+    }
     
     
+     public List obtenerListaInfantes()
+    {
+        List<Infante> listado = new ArrayList<>();
+        //Un método recursivo que recoora mis infantes y que sacando la
+        // info la adicione een el string
+        listarInfantes(listado);
+        return listado;
+    }
+    
+    public void listarInfantes(List listado)
+    {
+        if(cabeza !=null)
+        {
+            Nodo temp= cabeza;            
+            while(temp!=null)
+            {
+                //listado += temp.getDato()+"\n";
+                listado.add(temp.getDato());
+                temp=temp.getSiguiente();
+                
+            }            
+        }
+        
+    }
     
 }

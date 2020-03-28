@@ -18,9 +18,7 @@ public class Infante implements  Serializable{
 
     public Infante() {
         this.edad=1;
-    }
-
-    
+    }    
     
     public Infante(String nombre, short codigo, byte edad) {
         this.nombre = nombre;

@@ -40,29 +40,50 @@
     <h:body>
         <p:growl id="grwlErrores"/>
         <h:form id="frmInfante">
-            <p:panel header="Lista Simplemente Enlazada Infantes - Total Infantes #{sesionInfante.listaInfantes.contarNodos()}">
+            <p:panel header="Lista Simplemente Enlazada Infantes - Total Infantes #{sesionInfante.listaInfantes.contarNodos()} - total de hombre#{sesionInfante.listaInfantes.hombre()}  - total mujeres ">
+                   
+                     
                 <p:panelGrid columns="2">
                     <p:panel header="Datos Infante">
 
                         <p:panelGrid columns="2">
+                            
                             <p:outputLabel for="txtNombre" value="Nombre"/>
                             <p:inputText id="txtNombre" required="true" disabled="#{sesionInfante.deshabilitarFormulario}"
-                                         value="#{sesionInfante.infante.nombre}"   />
+                                         value="#{sesionInfante.infante.nombre}"  /> 
+                                         
+                            <p:outputLabel value="Genero"/>
+                            <p:selectOneMenu value="#{sesionInfante.infante.genero}" disabled="#{sesionInfante.deshabilitarFormulario}">
+                                <f:selectItem itemLabel="Hombre" itemValue="H"/>
+                                <f:selectItem itemLabel="Mujer" itemValue="M"/>
+                            </p:selectOneMenu>
+                            
+                            
+                            
+                            
+                                        
+                                         
                             <p:outputLabel for="spEdad" value="Edad"/>
                             <p:spinner id="spEdad" required="true" min="1" max="7" disabled="#{sesionInfante.deshabilitarFormulario}"
                                        value="#{sesionInfante.infante.edad}"/>
+                           
                             <p:outputLabel value="Al inicio"/>
                             <p:selectOneMenu value="#{sesionInfante.alInicio}" disabled="#{sesionInfante.deshabilitarFormulario}">
                                 <f:selectItem itemLabel="SI" itemValue="1"/>
                                 <f:selectItem itemLabel="NO" itemValue="0"/>
                             </p:selectOneMenu>
+                        
+                            
+                            
                         </p:panelGrid>
+                       <p:commandButton value="Nuevo" update="frmInfante" action="#{sesionInfante.habilitarFormulario()}"
+                                        disabled="#{!sesionInfante.deshabilitarFormulario}"/>
+                        <p:commandButton value="invertir" />
                         <p:commandButton value="Guardar" update="frmInfante,:grwlErrores"
                                          action="#{sesionInfante.guardarInfante()}" disabled="#{sesionInfante.deshabilitarFormulario}"/>
                         
-                        <p:commandButton value="Nuevo" update="frmInfante" action="#{sesionInfante.habilitarFormulario()}"
-                                         disabled="#{!sesionInfante.deshabilitarFormulario}"
-                                         />
+                        
+                                         
                         <p:panelGrid columns="3">
                             <p:commandButton value="Primero" action="#{sesionInfante.irPrimero()}" 
                                               update="frmInfante"/>
@@ -72,9 +93,14 @@
                                              update="frmInfante"/>                           
                             
                             
+                                
+                            
+                           
+                            
                             
                         </p:panelGrid>
-                    </p:panel>
+</p:panel>                    
+
                     
                     <p:panel header="Gráfico" id="pnlVista" style="width: 100%;">
                         <p:commandButton value="#{sesionInfante.textoVista}" 
@@ -86,8 +112,19 @@
                                 <f:facet name="header">
                                     <p:outputLabel value="Código"/>
                                 </f:facet>
+                                
                                 <p:outputLabel value="#{inf.codigo}"/>
                             </p:column>
+                            
+                            <p:column>
+                                <f:facet name="header">
+                                    <p:outputLabel value="genero"/>
+                                </f:facet>
+                                
+                                <p:outputLabel value="#{inf.genero}"/>
+                            </p:column>
+                            
+                            
                             <p:column>
                                 <f:facet name="header">
                                     <p:outputLabel value="Nombre"/>
@@ -109,6 +146,7 @@
                 </p:panelGrid>
                 <p:outputLabel value="#{sesionInfante.listaInfantes.obtenerListadoInfantes()}"/>
             </p:panel>
+       
         </h:form>
     </h:body>
 </html>

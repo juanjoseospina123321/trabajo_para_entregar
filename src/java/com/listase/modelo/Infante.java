@@ -15,7 +15,11 @@ public class Infante implements  Serializable{
     private String nombre; //null
     private short codigo; //0
     private byte edad; //0
-
+    private String genero;
+    private short conHom;
+    private short conMuj;
+    
+    
     public Infante() {
         this.edad=1;
     }    
@@ -26,6 +30,25 @@ public class Infante implements  Serializable{
         this.edad = edad;
     }
 
+    
+    public Infante(byte edad) {
+        this.edad = edad;
+    }
+
+    public Infante(String genero) {
+        this.genero = genero;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+ 
+    
     public String getNombre() {
         return nombre;
     }

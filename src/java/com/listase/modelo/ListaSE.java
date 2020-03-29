@@ -14,11 +14,13 @@ import java.util.List;
  * @author carloaiza
  */
 public class ListaSE implements Serializable{
-    private Nodo cabeza;
+    public Nodo cabeza;
+    private Infante infante;
 
     public ListaSE() {
     }
 
+    
     public Nodo getCabeza() {
         return cabeza;
     }
@@ -66,6 +68,9 @@ public class ListaSE implements Serializable{
         if(cabeza ==null)
         {
             return 0;
+            
+            
+            
         }
         else
         {
@@ -80,6 +85,40 @@ public class ListaSE implements Serializable{
             return cont;
         }
     }
+    
+    public short hombre()
+    {
+        if(infante.getGenero()!="M")
+        {
+            Nodo temp=cabeza;
+            short contH=0;
+            while(temp.getSiguiente()!=null)
+            {
+                temp=temp.getSiguiente();
+                contH++;
+            }
+           return contH;
+        }
+        return 0;
+        
+     
+    }
+       
+        public void mujer()
+        {
+          if(infante.getGenero()!="H")
+        {
+            Nodo temp=cabeza;
+            short contM=0;
+            while(temp.getSiguiente()!=null)
+            {
+                temp=temp.getSiguiente();
+                contM++;
+            }
+            
+        }  
+        }
+    
     
     public String obtenerListadoInfantes()
     {
@@ -132,4 +171,8 @@ public class ListaSE implements Serializable{
         
     }
     
-}
+
+    }
+
+
+

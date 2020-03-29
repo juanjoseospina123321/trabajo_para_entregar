@@ -37,6 +37,10 @@ public class SesionInfante implements Serializable {
     private boolean deshabilitarFormulario=true;
     private Nodo ayudante;   
     private String textoVista="Gráfico";
+   
+
+   
+    
     
     private List listadoInfantes;
     
@@ -53,10 +57,11 @@ public class SesionInfante implements Serializable {
     {
         listaInfantes = new ListaSE();        
         //LLenado de la bds
-        listaInfantes.adicionarNodo(new Infante("Carlitos",(short) 1, (byte)2));
+        listaInfantes.adicionarNodo(new Infante("Carlitos" ,(short) 1, (byte)2));
         listaInfantes.adicionarNodo(new Infante("Juanita",(short) 2, (byte)3));
         listaInfantes.adicionarNodo(new Infante("Martina",(short) 3, (byte)1));
         listaInfantes.adicionarNodoAlInicio(new Infante("Mariana",(short) 4, (byte)5));
+       
         ayudante = listaInfantes.getCabeza();
         infante = ayudante.getDato();     
         //Me llena el objeto List para la tabla
@@ -105,9 +110,13 @@ public class SesionInfante implements Serializable {
         model.connect(createConnection(giveup.getEndPoints().get(2), fail.getEndPoints().get(0), "Yes"));
     }
      
+    
+    
+    
     public DiagramModel getModel() {
         return model;
     }
+   
      
     private Connection createConnection(EndPoint from, EndPoint to, String label) {
         Connection conn = new Connection(from, to);
@@ -242,5 +251,5 @@ public class SesionInfante implements Serializable {
             textoVista = "Tabla";
         }
     }
-    
+     
 }
